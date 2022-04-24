@@ -1,8 +1,10 @@
 import pandas as pd
 import random
 
-names = list(pd.read_csv("./baby-names.csv")["name"][:1000])
-cities = list(pd.read_csv("./worldcities.csv")["city"][:1000])
+# choose the number of points you want in the data set by changing the number below
+Size = 1000
+names = list(pd.read_csv("./baby-names.csv")["name"][:Size])
+cities = list(pd.read_csv("./worldcities.csv")["city"][:Size])
 
 INCOME_UPPER = 1_000_000
 INCOME_LOWER = 1000
