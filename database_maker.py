@@ -1,40 +1,44 @@
 import pandas as pd
 import random
 
-# choose the number of points you want in the data set by changing the number below
-Size = 1000
-names = list(pd.read_csv("./baby-names.csv")["name"][:Size])
-cities = list(pd.read_csv("./worldcities.csv")["city"][:Size])
 
-INCOME_UPPER = 1_000_000
-INCOME_LOWER = 1000
-incomes = []
-for i in range(1000):
-    incomes.append(random.randint(INCOME_LOWER,INCOME_UPPER))
+# making a class
 
+class Dataset:
+    def __init__(self, size_dataset, income_lower, income_upper, age_lower, age_higher, names_file="./baby-names.csv",
+                 area_file="./worldcities.csv"):
+        self.income_lower = income_lower
+        self.income_upper = income_upper
+        self.age_lower = age_lower
+        self.age_upper = age_higher
+        self.size = size_dataset
 
-# Age
-AGE_LOWER = 15
-AGE_UPPER = 101
-ages = []
-for i in range(1000):
-    ages.append(random.randint(AGE_LOWER,AGE_UPPER))
+        self.receiving = [True, False]
 
-# Receiving the pension already?
-# TODO: Eliminate possibilty of true for a person below 60 or earning a lot
-receiving = [True, False]
-recips = []
-for i in range(1000):
-    recips.append(random.choice(receiving))
+        self.incomes = []
+        self.recips = []
+        self.ages = []
+        self.names = list(pd.read_csv(names_file)["name"][:self.size])
+        self.cities = list(pd.read_csv(area_file)["city"][:self.size])
 
-data = {
-    'name': names,
-    'age': ages,
-    "income": incomes,
-    "receiving pension": recips,
-    "cities": cities,
-    }
+    def make_database(self):
+        for step in range(self.size):
+            self.incomes.append(random.randint(self.income_lower, self.income_upper))
+            self.recips.append(random.choice(self.receiving))
+            self.ages.append(random.randint(self.age_lower, self.age_upper))
 
-final_dataset = pd.DataFrame(data)
-final_dataset.to_csv("./citizens_database.csv")
-print(final_dataset)
+        data = {
+            'name': self.names,
+            'age': self.ages,
+            "income": self.incomes,
+            "receiving pension": self.recips,
+            "cities": self.cities,
+        }
+
+        final_dataset = pd.DataFrame(data)
+        # final_dataset.to_csv("./citizens_database.csv")
+        return final_dataset
+
+# dataset = Dataset(size_dataset=100,income_lower=100,income_upper=1000,age_lower=15,age_higher=69)
+# new = dataset.make_database()
+# print(new)
