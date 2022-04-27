@@ -9,4 +9,6 @@ dataset = Dataset(size_dataset=2000,
 # Current age filter > 60, income less than 11,000.
 print(dataset)
 filtered_dataset = dataset[(dataset.age >= 60) & (dataset.income <= 11000) & (dataset.receiving_pension == False)]
+# isha the above line is there for filtering, i have done all the filtering in one go,you will need to do the conditions one by one
+
 print(filtered_dataset)
