@@ -31,7 +31,7 @@ class Dataset:
             'name': self.names,
             'age': self.ages,
             "income": self.incomes,
-            "receiving pension": self.recips,
+            "receiving_pension": self.recips,
             "cities": self.cities,
         }
 
