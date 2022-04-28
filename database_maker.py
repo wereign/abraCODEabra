@@ -15,24 +15,29 @@ class Dataset:
 
         self.receiving = [True, False]
 
+        self.names = []
+        self.areas = []
         self.incomes = []
         self.recips = []
         self.ages = []
-        self.names = list(pd.read_csv(names_file)["name"][:self.size])
-        self.cities = list(pd.read_csv(area_file)["city"][:self.size])
+        self.names_list = list(pd.read_csv(names_file)["name"])
+        self.areas_list = list(pd.read_csv(area_file)["city"][:1000])
 
     def make_database(self):
         for step in range(self.size):
+            self.names.append(random.choice(self.names_list))
+            self.areas.append(random.choice(self.areas_list))
             self.incomes.append(random.randint(self.income_lower, self.income_upper))
             self.recips.append(random.choice(self.receiving))
             self.ages.append(random.randint(self.age_lower, self.age_upper))
 
         data = {
+            ""
             'name': self.names,
             'age': self.ages,
             "income": self.incomes,
             "receiving_pension": self.recips,
-            "cities": self.cities,
+            "area": self.areas,
         }
 
         final_dataset = pd.DataFrame(data)
