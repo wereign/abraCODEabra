@@ -25,8 +25,8 @@ class Dataset:
 
     def make_database(self):
         for step in range(self.size):
-            self.name.append(random.choice(self.names_list))
-            self.area.append(random.choice(self.areas_list))
+            self.names.append(random.choice(self.names_list))
+            self.areas.append(random.choice(self.areas_list))
             self.incomes.append(random.randint(self.income_lower, self.income_upper))
             self.recips.append(random.choice(self.receiving))
             self.ages.append(random.randint(self.age_lower, self.age_upper))
