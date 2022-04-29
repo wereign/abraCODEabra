@@ -13,16 +13,18 @@ filtered_dataset = dataset[(dataset.age >= AGE_OLD) &
                            (dataset.income <= INCOME_BPL) &
                            (dataset.receiving_pension == "Not Receiving")]
 
+# Grouping the data area wise
 grouped_dataset = filtered_dataset.groupby("area")
-all_cities = filtered_dataset.area.unique()
 
-areawise = []
+# Finding all the cities in the filtered_dataset
+all_areas = filtered_dataset.area.unique()
+area_wise = []
 
-for city in all_cities:
-    temp = grouped_dataset.get_group(city)
-    areawise.append(temp)
+for area_ in all_areas:
+    temp = grouped_dataset.get_group(area_)
+    area_wise.append(temp)
 
-for area in areawise:
+for area in area_wise:
     print("____________NEW CITY_____________")
     print()
     print()
