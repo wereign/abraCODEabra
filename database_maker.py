@@ -13,7 +13,7 @@ class Dataset:
         self.age_upper = age_higher
         self.size = size_dataset
 
-        self.receiving = [True, False]
+        self.receiving = ["Receiving", "Not Receiving"]
 
         self.names = []
         self.areas = []
@@ -21,7 +21,7 @@ class Dataset:
         self.recips = []
         self.ages = []
         self.names_list = list(pd.read_csv(names_file)["name"])
-        self.areas_list = list(pd.read_csv(area_file)["city"][:1000])
+        self.areas_list = list(pd.read_csv(area_file)["city"][800:1000])
 
     def make_database(self):
         for step in range(self.size):
