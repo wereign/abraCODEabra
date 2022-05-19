@@ -29,9 +29,9 @@ class Dataset:
         self.NSAP_Incomes = []
         self.NSAP_Ages = []
 
-    def make_nsap_database(self):
+    def make_nsap_database(self, size):
 
-        for step in range(2000):
+        for step in range(int(size)):
             self.NSAP_Names.append(random.choice(self.names_list))
             self.NSAP_Area.append(random.choice(self.areas_list))
             self.NSAP_Incomes.append(random.randint(2000, 11000))
@@ -49,7 +49,7 @@ class Dataset:
         return nsap_dataframe
 
 
-    def make_database(self):
+    def make_database(self,nsap_database):
         for step in range(self.size):
             self.names.append(random.choice(self.names_list))
             self.areas.append(random.choice(self.areas_list))
@@ -66,12 +66,12 @@ class Dataset:
             "area": self.areas,
         }
         temp_data = pd.DataFrame(data)
-        temp_nsap = self.make_nsap_database()
-        final_dataset = temp_data.append(temp_nsap)
+        temp_nsap = nsap_database
+        final_dataset = temp_data.append(temp_nsap, ignore_index= True)
         # final_dataset.to_csv("./citizens_database.csv"
 
         # dataset["receiving_pension"] = np.where(dataset.age >= 60,)
-        return temp_nsap,final_dataset
+        return final_dataset
 
 
 # dataset = Dataset(size_dataset=100, income_lower=100, income_upper=1000, age_lower=15, age_higher=69)
